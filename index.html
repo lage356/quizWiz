@@ -4,14 +4,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" type="text/css" href="/style.css">
+    <title>QuizWiz Game</title>
 </head>
 
 <body>
 
     <div class="topMenu">
-        <h1 id="highScores">View Highscores</h1>
-        <h2 class="timer">Time: </h2>
+        <div>
+            <h1 id="highScores">View Highscores</h1>
+        </div>
+        <div>
+            <h1 class="timer">Time: </h1>
+        </div>
+
     </div>
 
     <main>
@@ -20,21 +27,21 @@
 
             <div class="quiz-welcome">
 
-                <h3>Coding Quiz Challenge</h3>
+                <h2>Coding Quiz Challenge</h2>
                 <p id="quiz-instr">Try to answer the following code-related questions within the time limit. Keep in
                     mind
                     that incorrect answers will penalize your scoretime by 10 seconds!</p>
-                <button type="button">Start Quiz!</button>
+                <button type="button" class="startButton">Start Quiz!</button>
 
 
             </div>
 
-            <div class="quiz-questions">
-                <h3>Questions</h3>
+            <div class="quiz-questions hidde "">
+                <h2>Questions</h2>
 
             </div>
 
-            <div class="quiz-answers">
+            <div class=" quiz-answers">
                 <ol>
                     <li></li>
                     <li></li>
@@ -51,8 +58,6 @@
             </div>
 
         </section>
-
-
 
     </main>
 

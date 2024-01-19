@@ -1,0 +1,22 @@
+body {
+  display: block;
+  margin: 0px;
+  background-color: rgb(228, 228, 228);
+}
+
+.topMenu {
+  display: flex;
+  justify-content: space-between;
+  background-color: rgb(127, 225, 255);
+}
+
+.quiz-container {
+  border: 1px solid blue;
+  text-align: center;
+}
+
+.startButton {
+  background-color: blueviolet;
+  color: white;
+  border-radius: 5px;
+}
