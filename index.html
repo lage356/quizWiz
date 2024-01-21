@@ -16,45 +16,40 @@
             <h1 id="highScores">View Highscores</h1>
         </div>
         <div>
-            <h1 class="timer">Time: </h1>
+            <h1 id="timer" class="timer">Timer:</h1>
         </div>
 
     </div>
 
     <main>
-
+        <!-- this is the complete quiz container -->
         <section class="quiz-container">
 
             <div class="quiz-welcome">
 
-                <h2>Coding Quiz Challenge</h2>
+                <h2 id="titleW">Coding Quiz Challenge</h2>
                 <p id="quiz-instr">Try to answer the following code-related questions within the time limit. Keep in
                     mind
                     that incorrect answers will penalize your scoretime by 10 seconds!</p>
-                <button type="button" class="startButton">Start Quiz!</button>
+                <button class="startButton">Start Quiz!</button>
 
 
             </div>
 
-            <div class="quiz-questions hidde "">
-                <h2>Questions</h2>
+            <div class="game-container">
+                <div class="quiz-questions">
+                    <h3 class="questionsHere"></h3>
+                </div>
+                <!-- This is the answers div -->
+                <div id="quiz-answers">
+                   
 
-            </div>
+                </div>
 
-            <div class=" quiz-answers">
-                <ol>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                </ol>
-
-            </div>
-
-            <div class="answer-validation">
-                <h3>R&W</h3>
-
-
+                <!-- Validation div -->
+                <div class="answer-validation">
+                    <h3 class="renderValid"></h3>
+                </div>
             </div>
 
         </section>
