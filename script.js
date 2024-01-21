@@ -3,35 +3,40 @@
 var timerEl = document.querySelector(".timer");
 var questionEl = document.querySelector(".questionsHere");
 var quizWelcome = document.querySelector(".quiz-welcome");
+var gameInstru = document.getElementById("quiz-instr");
 var gameContainer = document.querySelector(".game-container");
+var quizAnswers = document.getElementById("quiz-answers");
 var startButton = document.querySelector(".startButton");
+var displayRetro = document.querySelector(".renderValid");
 
 //? Here a declare variables
-var secondsLeft = 10;
+var secondsLeft = 100;
 var welcomeH = "Coding Quiz Challenge";
 var instructionsP =
   "Try to answer the following code-related questions within the time limit. Keep inmind that incorrect answers will penalize your scoretime by 10 seconds!";
-var questionOne = "Commonly used data types DO NOT iclude:";
-var questionTwo =
-  "The condition in an if/else statement is enclosed within _______.";
-var questionThree = "Arrays in JavaScript can be used to store ___________.";
-var questionFour =
-  "String values must be enclosed within ________ when being assigned to variables";
-var questionFive =
-  "A very useful tool used during development and debugging for printing content to the debugger is: ";
 var finish = "All Done!";
+let currentQuestionIndex = 0;
+let score = 0;
 
-var answersOne = ["Strings", "Booleans", "Alerts", "Numbers"];
-var answersTwo = ["Quotes", "Curly-brackets", "Parentheses", "Square-brackets"];
-var asnwersThree = [
-  "Numbers and strings",
-  "Other arrays",
-  "Booleans",
-  "All of the above",
-];
-var answersFour = ["Commas", "Curly brackets", "Quotes", "Parentheses"];
+// var questionOne = "Commonly used data types DO NOT iclude:";
+// var questionTwo =
+//   "The condition in an if/else statement is enclosed within _______.";
+// var questionThree = "Arrays in JavaScript can be used to store ___________.";
+// var questionFour =
+//   "String values must be enclosed within ________ when being assigned to variables";
+// var questionFive =
+//   "A very useful tool used during development and debugging for printing content to the debugger is: ";
+// var answersOne = ["Strings", "Booleans", "Alerts", "Numbers"];
+// var answersTwo = ["Quotes", "Curly-brackets", "Parentheses", "Square-brackets"];
+// var asnwersThree = [
+//   "Numbers and strings",
+//   "Other arrays",
+//   "Booleans",
+//   "All of the above",
+// ];
+// var answersFour = ["Commas", "Curly brackets", "Quotes", "Parentheses"];
 
-const quizQuestAns = [
+const quizObject = [
   {
     question: "Commonly used data types DO NOT iclude:",
     answers: ["Strings", "Booleans", "Alerts", "Numbers"],
@@ -45,46 +50,83 @@ const quizQuestAns = [
   },
   {
     question: "Arrays in JavaScript can be used to store ___________.",
-    answers: ["Numbers and strings",
-    "Other arrays",
-    "Booleans",
-    "All of the above"], 
-    correctAnswer: "All of the above"
-  }, 
-  {
-    question: "String values must be enclosed within ________ when being assigned to variables",
-    answers: ["Commas", "Curly brackets", "Quotes", "Parentheses"],
-    correctAnswer: "Quotes"
+    answers: [
+      "Numbers and strings",
+      "Other arrays",
+      "Booleans",
+      "All of the above",
+    ],
+    correctAnswer: "All of the above",
   },
   {
-    question: "A very useful tool used during development and debugging for printing content to the debugger is: ",
-    answers: ["Javascript", "Terminal/bash","for loops","console.log"],
-    correctAnswer: "console.log"
-  }
+    question:
+      "String values must be enclosed within ________ when being assigned to variables",
+    answers: ["Commas", "Curly brackets", "Quotes", "Parentheses"],
+    correctAnswer: "Quotes",
+  },
+  {
+    question:
+      "A very useful tool used during development and debugging for printing content to the debugger is: ",
+    answers: ["Javascript", "Terminal/bash", "for loops", "console.log"],
+    correctAnswer: "console.log",
+  },
 ];
 
 function startGame() {
   setTime();
+  clearWelcome();
   startButton.disabled = true;
   renderQuestions();
 }
 
 function renderQuestions() {
-  questionEl.textContent = questionOne;
+  const currentQuestion = quizObject[currentQuestionIndex];
+  questionEl.textContent = currentQuestion.question;
 
-  var quizAnswers = document.getElementById("quiz-answers");
+  quizAnswers.innerHTML = "";
+  currentQuestion.answers.forEach((answers, index) => {
+    const answerElement = document.createElement("li");
+    answerElement.className = "answers";
+    answerElement.textContent = answers;
+    answerElement.addEventListener("click", () => selectOption(index));
+    quizAnswers.appendChild(answerElement);
+  });
 
-  var ol = document.createElement("ol");
+  //   questionEl.textContent = questionOne;
+  //   var quizAnswers = document.getElementById("quiz-answers");
+  //   var ol = document.createElement("ol");
+  //   for (var i = 0; i < answersOne.length; i++) {
+  //     var li = document.createElement("li");
+  //     li.textContent = answersOne[i];
+  //     ol.appendChild(li);
+  //   }
+  //   quizAnswers.appendChild(ol);
+}
 
-  for (var i = 0; i < answersOne.length; i++) {
-    var li = document.createElement("li");
+function selectOption(answersIndex) {
+  const selectedOption = quizObject[currentQuestionIndex].answers[answersIndex];
 
-    li.textContent = answersOne[i];
-
-    ol.appendChild(li);
+  if (selectedOption === quizObject[currentQuestionIndex].correctAnswer) {
+    score++;
+    displayRetro.textContent = "Correct!";
+  } else {
+    secondsLeft = secondsLeft - 10;
+    displayRetro.textContent = "Incorrect!";
   }
+  currentQuestionIndex++;
 
-  quizAnswers.appendChild(ol);
+  if (currentQuestionIndex < quizObject.length) {
+    renderQuestions();
+  } else {
+    console.log("hello");
+    
+  }
+}
+
+function clearWelcome(){
+
+    quizWelcome.textContent = " ";
+    gameInstru.textContent =" ";
 }
 
 function setTime() {
