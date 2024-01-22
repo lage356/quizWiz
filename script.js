@@ -9,14 +9,16 @@ var gameContainer = document.querySelector(".game-container");
 var registerPlayer = document.querySelector(".registerPlayer");
 var quizAnswers = document.getElementById("quiz-answers");
 var startButton = document.querySelector(".startButton");
+var submitResultsB = document.querySelector(".submit_results");
 var displayRetro = document.querySelector(".renderValid");
+var userScore = document.querySelector("#results");
+var sendInitials = document.querySelector("#initials");
 
 //? Here a declare variables
 var secondsLeft = 100;
 var finish = "All Done!";
 let currentQuestionIndex = 0;
 let score = 0;
-
 
 const quizObject = [
   {
@@ -55,8 +57,8 @@ const quizObject = [
 ];
 
 function startGame() {
-  quizWelcome.classList.add('hide')
-  gameContainer.classList.remove('hide')
+  quizWelcome.classList.add("hide");
+  gameContainer.classList.remove("hide");
   setTime();
   renderQuestions();
 }
@@ -85,37 +87,30 @@ function renderQuestions() {
   });
 }
 
-
-
 function selectOption(answersIndex) {
-    
   const selectedOption = quizObject[currentQuestionIndex].answers[answersIndex];
 
   if (selectedOption === quizObject[currentQuestionIndex].correctAnswer) {
-    score++;
+    score = score + 10;
     displayRetro.textContent = "Correct!";
-    
+    displayRetro.setAttribute("style", "color:green");
   } else {
     secondsLeft = secondsLeft - 10;
     displayRetro.textContent = "Incorrect!";
+    displayRetro.setAttribute("style", "color:red");
   }
-  
+
   currentQuestionIndex++;
-  
 
   if (currentQuestionIndex < quizObject.length) {
     renderQuestions();
   } else {
-   
-
-    gameContainer.classList.add('hide');
-    registerPlayer.classList.remove('hide');
+    gameContainer.classList.add("hide");
+    registerPlayer.classList.remove("hide");
+    userScore.textContent = score;
     secondsLeft = 1;
-
   }
-  
 }
-
 
 function setTime() {
   var timeInterval = setInterval(function () {
@@ -127,5 +122,18 @@ function setTime() {
     }
   }, 1000);
 }
+
+submitResultsB.addEventListener("click",function(event){
+  event.preventDefault();
+
+  var iniciales = sendInitials.value;
+  var results = score;
+
+  localStorage.setItem("Initials",iniciales);
+  localStorage.setItem("score", results);
+  
+
+
+});
 
 startButton.addEventListener("click", startGame);

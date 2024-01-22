@@ -97,7 +97,16 @@ footer {
 
   font-size: xx-large;
 }
+#your-score {
+  font-size: x-large;
+}
+
+.results-form {
+  margin: 1rem;
+  box-sizing: border-box; 
+
+}
 .registerPlay{
   padding: 10px;
   margin:1rem;
-}
+} 
