@@ -19,7 +19,7 @@ Welcome to the QuizWiz game! It was developed to enhance the user learning exper
 
 ## Example
 
-![QuizWiz](Screenshot_passwordGen.png)
+![QuizWiz](/screenshotquizWiz.png)
 
 
 ## Technologies Used
