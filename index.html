@@ -11,7 +11,7 @@
 
 <body>
 
-    <div class="topMenu">
+    <header class="topMenu">
         <div>
             <h1 id="highScores">View Highscores</h1>
         </div>
@@ -19,7 +19,7 @@
             <h1 id="timer" class="timer">Timer:</h1>
         </div>
 
-    </div>
+    </header>
 
     <main>
         <!-- this is the complete quiz container -->
@@ -33,21 +33,27 @@
 
 
             </div>
-
-            <div class="game-container">
+            <!-- This is the complete game container -->
+            <div class="game-container hide">
                 <div class="quiz-questions">
                     <h3 class="questionsHere"></h3>
                 </div>
                 <!-- This is the answers div -->
                 <div id="quiz-answers">
-                   
-
                 </div>
 
                 <!-- Validation div -->
                 <div class="answer-validation">
                     <h3 class="renderValid"></h3>
                 </div>
+            </div>
+            <div class="registerPlayer hide">
+                <h3 id="final-score">All Done! </h3>
+                <p id="your-score">Your final score is </p>
+                <form>
+                    <input placeholder="Enter initials" id="initials"/>
+                    <button id="submit_results">Submit!</button>
+                </form>
             </div>
 
         </section>
