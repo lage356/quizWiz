@@ -3,7 +3,8 @@
 var timerEl = document.querySelector(".timer");
 var questionEl = document.querySelector(".questionsHere");
 var quizWelcome = document.querySelector(".quiz-welcome");
-var gameInstru = document.getElementById("quiz-instr");
+var gameTitle = document.querySelector(".titleW");
+var gameInstru = document.querySelector(".quiz-instr");
 var gameContainer = document.querySelector(".game-container");
 var quizAnswers = document.getElementById("quiz-answers");
 var startButton = document.querySelector(".startButton");
@@ -11,9 +12,7 @@ var displayRetro = document.querySelector(".renderValid");
 
 //? Here a declare variables
 var secondsLeft = 100;
-var welcomeH = "Coding Quiz Challenge";
-var instructionsP =
-  "Try to answer the following code-related questions within the time limit. Keep inmind that incorrect answers will penalize your scoretime by 10 seconds!";
+
 var finish = "All Done!";
 let currentQuestionIndex = 0;
 let score = 0;
@@ -73,11 +72,32 @@ const quizObject = [
 ];
 
 function startGame() {
+  currentQuestion =0; 
+  currentQuestionIndex = 0
+  secondsLeft = 100;
+  clearInterval();
   setTime();
-  clearWelcome();
-  startButton.disabled = true;
+  hideWelcome();
+  unhideQuizSection();
   renderQuestions();
 }
+
+function init() {
+  var welcomeH = "Coding Quiz Challenge";
+  var instructionsP =
+    "Try to answer the following code-related questions within the time limit. Keep inmind that incorrect answers will penalize your scoretime by 10 seconds!";
+  gameTitle.textContent = welcomeH;
+  gameInstru.textContent = instructionsP;
+}
+
+function hideWelcome() { 
+    quizWelcome.style.display= "none";
+}
+function showWelcome() { 
+    quizWelcome.style.display= "contents";
+}
+
+init();
 
 function renderQuestions() {
   const currentQuestion = quizObject[currentQuestionIndex];
@@ -91,19 +111,10 @@ function renderQuestions() {
     answerElement.addEventListener("click", () => selectOption(index));
     quizAnswers.appendChild(answerElement);
   });
-
-  //   questionEl.textContent = questionOne;
-  //   var quizAnswers = document.getElementById("quiz-answers");
-  //   var ol = document.createElement("ol");
-  //   for (var i = 0; i < answersOne.length; i++) {
-  //     var li = document.createElement("li");
-  //     li.textContent = answersOne[i];
-  //     ol.appendChild(li);
-  //   }
-  //   quizAnswers.appendChild(ol);
 }
 
 function selectOption(answersIndex) {
+    
   const selectedOption = quizObject[currentQuestionIndex].answers[answersIndex];
 
   if (selectedOption === quizObject[currentQuestionIndex].correctAnswer) {
@@ -118,15 +129,20 @@ function selectOption(answersIndex) {
   if (currentQuestionIndex < quizObject.length) {
     renderQuestions();
   } else {
-    console.log("hello");
+    showWelcome();
+    hideQuizSection();
+    secondsLeft = 1;
     
+//    currentQuestionIndex=0;
   }
+  
 }
 
-function clearWelcome(){
-
-    quizWelcome.textContent = " ";
-    gameInstru.textContent =" ";
+function hideQuizSection() {
+    gameContainer.style.display= "none";
+}
+function unhideQuizSection() {
+    gameContainer.style.display= "contents";
 }
 
 function setTime() {
@@ -134,7 +150,7 @@ function setTime() {
     secondsLeft--;
     timerEl.textContent = "Timer: " + secondsLeft;
 
-    if (secondsLeft === 0) {
+    if (secondsLeft <= 0) {
       clearInterval(timeInterval);
     }
   }, 1000);
