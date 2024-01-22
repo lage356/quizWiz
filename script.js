@@ -55,15 +55,9 @@ const quizObject = [
 ];
 
 function startGame() {
-  // currentQuestion =0; 
-  // currentQuestionIndex = 0
-  secondsLeft = 100;
-  // clearInterval();
-  setTime();
-  // hideWelcome();
   quizWelcome.classList.add('hide')
   gameContainer.classList.remove('hide')
-  // unhideQuizSection();
+  setTime();
   renderQuestions();
 }
 
