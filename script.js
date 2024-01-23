@@ -10,9 +10,11 @@ var registerPlayer = document.querySelector(".registerPlayer");
 var quizAnswers = document.getElementById("quiz-answers");
 var startButton = document.querySelector(".startButton");
 var submitResultsB = document.querySelector(".submit_results");
+var goBack = document.querySelector(".goBack");
 var displayRetro = document.querySelector(".renderValid");
 var userScore = document.querySelector("#results");
 var sendInitials = document.querySelector("#initials");
+var resultsPage = document.querySelector(".resultsPage");
 
 //? Here a declare variables
 var secondsLeft = 100;
@@ -20,6 +22,7 @@ var finish = "All Done!";
 let currentQuestionIndex = 0;
 let score = 0;
 
+//? Here is where the object is created with the questions and answers on arrays 
 const quizObject = [
   {
     question: "Commonly used data types DO NOT iclude:",
@@ -64,6 +67,7 @@ function startGame() {
 }
 
 function init() {
+  quizWelcome.classList.remove('hide');
   var welcomeH = "Coding Quiz Challenge";
   var instructionsP =
     "Try to answer the following code-related questions within the time limit. Keep inmind that incorrect answers will penalize your scoretime by 10 seconds!";
@@ -111,7 +115,7 @@ function selectOption(answersIndex) {
     secondsLeft = 1;
   }
 }
-
+// Here is the timer function 
 function setTime() {
   var timeInterval = setInterval(function () {
     secondsLeft--;
@@ -123,6 +127,7 @@ function setTime() {
   }, 1000);
 }
 
+//Submitbutton to set items in the local storage 
 submitResultsB.addEventListener("click",function(event){
   event.preventDefault();
 
@@ -131,8 +136,17 @@ submitResultsB.addEventListener("click",function(event){
 
   localStorage.setItem("Initials",iniciales);
   localStorage.setItem("score", results);
-  
 
+  registerPlayer.classList.add("hide");
+  resultsPage.classList.remove("hide");
+
+});
+
+goBack.addEventListener("click",function(event){
+
+  resultsPage.classList.add("hide");
+  init(); 
+  startGame();
 
 });
 
