@@ -10,7 +10,7 @@ Welcome to the QuizWiz game! It was developed to enhance the user learning exper
 
 ## Getting Started
 
-1. Open the [QuizWiz Game](#).
+1. Open the [QuizWiz Game](https://lage356.github.io/quizWiz/).
 2. Click on Start Quiz! Button
 3. Click on the correct answer 
 4. Enter your initials in order to record your score.
